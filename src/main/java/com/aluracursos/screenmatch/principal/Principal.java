@@ -12,8 +12,9 @@ public class Principal {
     private Scanner teclado = new Scanner(System.in);
     private ConsumoAPI consumoApi = new ConsumoAPI();
     private final String URL_BASE = "https://www.omdbapi.com/?t=";
-    private final String API_KEY = "&apikey=TU-APIKEY-OMDB";
+    private final String API_KEY = "&apikey=eca75ade";
     private ConvierteDatos conversor = new ConvierteDatos();
+    private List<DatosSerie> datosSeries = new ArrayList<>();
 
     public void muestraElMenu() {
         var opcion = -1;
@@ -36,7 +37,9 @@ public class Principal {
                 case 2:
                     buscarEpisodioPorSerie();
                     break;
-
+                case 3:
+                    mostrarSeriesBuscadas();
+                    break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
                     break;
@@ -65,12 +68,18 @@ public class Principal {
             temporadas.add(datosTemporada);
         }
         temporadas.forEach(System.out::println);
+        System.out.println("\n");
     }
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
+        datosSeries.add(datos);
         System.out.println(datos);
+        System.out.println("\n");
     }
 
-
+    private void mostrarSeriesBuscadas(){
+        datosSeries.forEach(System.out::println);
+        System.out.println("\n");
+    }
 }
 

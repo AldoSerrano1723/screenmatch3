@@ -76,7 +76,6 @@ public class Principal {
         System.out.println(datos);
         System.out.println("\n");
     }
-
     private void mostrarSeriesBuscadas(){
         datosSeries.forEach(System.out::println);
         System.out.println("\n");

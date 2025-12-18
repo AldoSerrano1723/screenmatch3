@@ -5,9 +5,16 @@ import com.google.genai.types.GenerateContentResponse;
 
 public class ConsultaGemini {
     public static String obtenerTraduccion(String texto){
-        String apiKey = "AIzaSyBxwcNj82yKnqvHZCHrejq31MTatUxpalw";
+        String apiKey =  System.getenv("GEMINI_API_KEY");
         String modelo = "gemini-2.5-flash";
         String prompt = "Traduce el siguiente texto al español. solo pon la traduccion: " + texto;
+
+        //Validación simple para evitar errores si la variable no existe
+        if (apiKey == null || apiKey.isEmpty()) {
+            System.err.println("Error: La variable de entorno GEMINI_API_KEY no está configurada.");
+            return null;
+        }
+
         Client cliente = Client.builder().apiKey(apiKey).build();
 
         try {

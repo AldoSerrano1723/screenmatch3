@@ -2,10 +2,15 @@ package com.aluracursos.screenmatch.service;
 
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentResponse;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ConsultaGemini {
+    //METODOS
     public static String obtenerTraduccion(String texto){
-        String apiKey =  System.getenv("GEMINI_API_KEY");
+
+        String apiKey = System.getenv("GEMINI_API_KEY");
         String modelo = "gemini-2.5-flash";
         String prompt = "Traduce el siguiente texto al español. solo pon la traduccion: " + texto;
 

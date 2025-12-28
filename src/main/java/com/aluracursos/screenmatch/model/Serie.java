@@ -1,19 +1,34 @@
 package com.aluracursos.screenmatch.model;
 
 import com.aluracursos.screenmatch.service.ConsultaGemini;
-import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.OptionalDouble;
 
+@Entity
+@Table(name = "series")
 public class Serie {
+    //ATRIBUTOS
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
     private String titulo;
     private Integer totalTemporadas;
     private Double evaluacion;
     private String poster;
+
+    @Enumerated(EnumType.STRING)
     private Categoria genero;
     private String actores;
     private String sinopsis;
 
+    @Transient// Indica a JPA que ignore este campo por el momento
+    private List<Episodio> episodios;
+
+    //CONSTRUCTORES
     public Serie(DatosSerie datosSerie) {
         this.titulo = datosSerie.titulo();
         this.totalTemporadas = datosSerie.totalTemporadas();
@@ -32,6 +47,17 @@ public class Serie {
 
         this.actores = datosSerie.actores();
         this.sinopsis = ConsultaGemini.obtenerTraduccion(datosSerie.sinopsis());
+    }
+
+    public Serie(){}
+
+    //GETTERS Y SETTERS
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -90,6 +116,7 @@ public class Serie {
         this.sinopsis = sinopsis;
     }
 
+    //METODOS
     @Override
     public String toString() {
         return """

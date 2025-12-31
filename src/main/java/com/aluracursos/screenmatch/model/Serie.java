@@ -25,7 +25,9 @@ public class Serie {
     private String actores;
     private String sinopsis;
 
-    @Transient// Indica a JPA que ignore este campo por el momento
+    // RELACIÓN: Una serie tiene una lista de episodios
+    // 'mappedBy' debe coincidir con el nombre del atributo en la clase Episodio ("serie")
+    @OneToMany(mappedBy = "serie")
     private List<Episodio> episodios;
 
     //CONSTRUCTORES

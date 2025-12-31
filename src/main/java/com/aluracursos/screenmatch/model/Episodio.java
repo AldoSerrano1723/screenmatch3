@@ -27,8 +27,8 @@ public class Episodio {
     // CONSTRUCTOR PREDETERMINADO (Obligatorio para JPA)
     public Episodio(){}
 
-    public Episodio(Integer numero, DatosEpisodio d) {
-        this.temporada = numero;
+    public Episodio(Integer numeroTemporada, DatosEpisodio d) {
+        this.temporada = numeroTemporada;
         this.titulo = d.titulo();
         this.numeroEpisodio = d.numeroEpisodio();
         try{

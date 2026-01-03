@@ -27,7 +27,7 @@ public class Serie {
 
     // RELACIÓN: Una serie tiene una lista de episodios
     // 'mappedBy' debe coincidir con el nombre del atributo en la clase Episodio ("serie")
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Episodio> episodios;
 
     //CONSTRUCTORES
@@ -54,13 +54,12 @@ public class Serie {
     public Serie(){}
 
     //GETTERS Y SETTERS
-
-
     public List<Episodio> getEpisodios() {
         return episodios;
     }
 
     public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(e -> e.setSerie(this));
         this.episodios = episodios;
     }
 
@@ -140,7 +139,8 @@ public class Serie {
             Evaluación: %.1f
             Actores: %s
             Sinopsis: %s
+            Episodios: %s
             -------------------------
-            """.formatted(titulo, genero, totalTemporadas, evaluacion, actores, sinopsis);
+            """.formatted(titulo, genero, totalTemporadas, evaluacion, actores, sinopsis, episodios);
     }
 }

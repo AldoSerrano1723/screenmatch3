@@ -67,6 +67,7 @@ public class Principal {
                     break;
                 case 7:
                     buscarPorTemporadaYEvaluacion();
+                    break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
                     break;
@@ -178,7 +179,7 @@ public class Principal {
         System.out.println("Ingresa la evaluacion minima que debe tener la serie: ");
         var minimoDeEvaluacion = teclado.nextDouble();
         teclado.nextLine();
-        series = repositorio.findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(numeroMaximoDeTemporadas, minimoDeEvaluacion);
+        series = repositorio.seriesPorTemporadaYEvaluacion(numeroMaximoDeTemporadas, minimoDeEvaluacion);
         series.forEach(s -> System.out.println("Titulo: " + s.getTitulo() + "; Temporadas: " + s.getTotalTemporadas() + "; Evaluacion: " + s.getEvaluacion()));
     }
 }

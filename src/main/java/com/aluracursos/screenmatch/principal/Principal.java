@@ -38,6 +38,7 @@ public class Principal {
                     4 - Buscar serie por titulo
                     5 - Top 5 Series
                     6 - Buscar series por categoria
+                    7 - Buscar series por Temporadas y evaluacion
                                   
                     0 - Salir
                     """;
@@ -64,6 +65,8 @@ public class Principal {
                 case 6:
                     buscarPorCategoria();
                     break;
+                case 7:
+                    buscarPorTemporadaYEvaluacion();
                 case 0:
                     System.out.println("Cerrando la aplicación...");
                     break;
@@ -166,6 +169,17 @@ public class Principal {
         series = repositorio.findByGenero(cateogoriaEcontrada);
         System.out.println("Series de la categoria " + nombreCategoria + " Son: ");
         series.forEach(System.out::println);
+    }
+
+    private void buscarPorTemporadaYEvaluacion(){
+        System.out.println("Ingresa el maximo de temporadas que debe tener la serie: ");
+        var numeroMaximoDeTemporadas = teclado.nextInt();
+        teclado.nextLine();
+        System.out.println("Ingresa la evaluacion minima que debe tener la serie: ");
+        var minimoDeEvaluacion = teclado.nextDouble();
+        teclado.nextLine();
+        series = repositorio.findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(numeroMaximoDeTemporadas, minimoDeEvaluacion);
+        series.forEach(s -> System.out.println("Titulo: " + s.getTitulo() + "; Temporadas: " + s.getTotalTemporadas() + "; Evaluacion: " + s.getEvaluacion()));
     }
 }
 
